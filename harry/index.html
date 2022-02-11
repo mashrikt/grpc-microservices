@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meter Usage</title>
+    <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1> Meter Usage Report</h1>
+    <table id="records_table" border='1'>
+      <tr>
+        <th>Time</th>
+        <th>Usage</th>
+      </tr>
+    </table>
+    <script type = "text/javascript" language = "javascript">
+        $(document).ready(function() {
+            $.ajax({url: "http://127.0.0.1:8000/usages/", success: function (response) {
+                var trHTML = '';
+                $.each(response.data, function (i, item) {
+                    trHTML += '<tr><td>' + item.time + '</td><td>' + item.quantity + '</td></tr>';
+                });
+                $('#records_table').append(trHTML);
+            }});
+        });
+    </script>
+</body>
+</html>
